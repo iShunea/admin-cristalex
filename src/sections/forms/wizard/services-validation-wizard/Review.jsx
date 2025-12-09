@@ -63,7 +63,7 @@ export default function Review({ data }) {
         <Grid item xs={12}>
           <Divider sx={{ my: 2 }} />
           <Typography variant="h6" sx={{ mb: 2 }}>Multilingual Content</Typography>
-          <MultiLanguageTabs currentLang={currentLang} setCurrentLang={setCurrentLang} />
+          <MultiLanguageTabs value={currentLang} onChange={(e, newValue) => setCurrentLang(newValue)} />
         </Grid>
 
         <Grid item xs={12}>

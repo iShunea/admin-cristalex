@@ -162,7 +162,7 @@ export default function TextForm({ data, setData, handleNext, setErrorIndex }) {
             <Typography variant="h6" sx={{ mb: 2 }}>
               Multilingual Content
             </Typography>
-            <MultiLanguageTabs currentLang={currentLang} setCurrentLang={setCurrentLang} />
+            <MultiLanguageTabs value={currentLang} onChange={(e, newValue) => setCurrentLang(newValue)} />
           </Grid>
 
           <Grid item xs={12}>
