@@ -64,7 +64,7 @@ export default function EditTeamPage() {
     e.preventDefault();
     try {
       setIsLoading(true); // Set loading to true when the request starts
-      const response = await axiosInstance.put('admin/edit/team/' + idPage, data);
+      const response = await axiosInstance.put('/api/admin/edit/team/' + idPage, data);
       console.log('response:', response);
       setErrorMessage('');
     } catch (error) {
@@ -95,7 +95,7 @@ export default function EditTeamPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const retrieveArticles = await axiosInstance.get('admin/edit/team/' + idPage);
+        const retrieveArticles = await axiosInstance.get('/api/admin/edit/team/' + idPage);
         if (retrieveArticles.status === 200) {
           console.log(retrieveArticles);
           setData(retrieveArticles.data);

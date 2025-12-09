@@ -64,7 +64,7 @@ export default function EditWorkPage() {
     e.preventDefault();
     try {
       setIsLoading(true); // Set loading to true when the request starts
-      const response = await axiosInstance.put('admin/edit/works/' + idPage, data);
+      const response = await axiosInstance.put('/api/admin/edit/works/' + idPage, data);
       console.log('response:', response);
       setErrorMessage('');
     } catch (error) {
@@ -95,7 +95,7 @@ export default function EditWorkPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const retrieveArticles = await axiosInstance.get('admin/edit/works/' + idPage);
+        const retrieveArticles = await axiosInstance.get('/api/admin/edit/works/' + idPage);
         if (retrieveArticles.status === 200) {
           console.log(retrieveArticles);
           setData(retrieveArticles.data);

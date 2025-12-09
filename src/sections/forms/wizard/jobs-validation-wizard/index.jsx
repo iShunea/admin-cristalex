@@ -59,7 +59,7 @@ export default function AddJobs() {
     e.preventDefault();
     try {
       setIsLoading(true); // Set loading to true when the request starts
-      const response = await axiosInstance.post('jobs', data);
+      const response = await axiosInstance.post('/api/jobs', data);
       // const response = await axios.post("https://cors-anywhere.herokuapp.com/https://httpbin.org/post", getAxiosObject(data))
       console.log('response:', response);
       setErrorMessage('');

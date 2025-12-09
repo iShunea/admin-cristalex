@@ -111,7 +111,7 @@ export default function SortingTable() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const retrievePosts = await axiosInstance.get('admin/social-media-posts');
+        const retrievePosts = await axiosInstance.get('/api/social-media-posts/all');
         if (retrievePosts.status === 200) {
           setData(retrievePosts.data);
         } else {

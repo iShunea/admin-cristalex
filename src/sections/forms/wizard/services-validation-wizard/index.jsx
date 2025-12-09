@@ -62,7 +62,7 @@ export default function AddServicesPages() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const response = await axiosInstance.post('admin/services', data);
+      const response = await axiosInstance.post('/api/services', data);
       console.log('response:', response.statusText);
       setErrorMessage('');
     } catch (error) {

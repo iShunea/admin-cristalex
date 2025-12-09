@@ -62,7 +62,7 @@ export default function AddWorkPage() {
     e.preventDefault();
     try {
       setIsLoading(true); // Set loading to true when the request starts
-      const response = await axiosInstance.post('works', data);
+      const response = await axiosInstance.post('/api/works', data);
       console.log('response:', response.statusText);
       setErrorMessage('');
     } catch (error) {

@@ -54,7 +54,7 @@ export default function AddSocialMediaPost() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const response = await axiosInstance.post('admin/social-media-posts', data);
+      const response = await axiosInstance.post('/api/social-media-posts', data);
       console.log('response:', response.statusText);
       setErrorMessage('');
     } catch (error) {

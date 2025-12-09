@@ -65,7 +65,7 @@ export default function EditServicePage() {
     try {
       setIsLoading(true); // Set loading to true when the request starts
       console.log('data sent:', data);
-      await axiosInstance.put('admin/edit/services/' + idPage, data);
+      await axiosInstance.put('/api/admin/edit/services/' + idPage, data);
       setErrorMessage('');
     } catch (error) {
       if (error.response) {
@@ -95,7 +95,7 @@ export default function EditServicePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const retrieveArticles = await axiosInstance.get('admin/edit/services/' + idPage);
+        const retrieveArticles = await axiosInstance.get('/api/admin/edit/services/' + idPage);
         if (retrieveArticles.status === 200) {
           console.log(retrieveArticles);
           setData(retrieveArticles.data);

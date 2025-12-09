@@ -63,7 +63,7 @@ export default function AddTeamMember() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const response = await axiosInstance.post('admin/team-members', data);
+      const response = await axiosInstance.post('/api/team', data);
       console.log('response:', response.statusText);
       setErrorMessage('');
     } catch (error) {

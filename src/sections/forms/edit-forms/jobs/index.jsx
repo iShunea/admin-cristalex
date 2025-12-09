@@ -61,7 +61,7 @@ export default function EditJobsPage() {
     e.preventDefault();
     try {
       setIsLoading(true); // Set loading to true when the request starts
-      const response = await axiosInstance.put('admin/edit/jobs/' + idPage, data);
+      const response = await axiosInstance.put('/api/admin/edit/jobs/' + idPage, data);
       console.log('response:', response);
       setErrorMessage('');
     } catch (error) {
@@ -92,7 +92,7 @@ export default function EditJobsPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const retrieveArticles = await axiosInstance.get('admin/edit/jobs/' + idPage);
+        const retrieveArticles = await axiosInstance.get('/api/admin/edit/jobs/' + idPage);
         if (retrieveArticles.status === 200) {
           console.log(retrieveArticles.data);
           setData(retrieveArticles.data);
