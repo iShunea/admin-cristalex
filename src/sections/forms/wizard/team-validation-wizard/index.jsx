@@ -75,7 +75,7 @@ export default function AddTeamMember() {
       formData.append('bio', data.bio || '');
       formData.append('orderIndex', data.orderIndex !== undefined ? data.orderIndex : 0);
       
-      const response = await axiosInstance.post('/api/team', formData, {
+      const response = await axiosInstance.post('/api/admin/team', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       console.log('response:', response.statusText);
