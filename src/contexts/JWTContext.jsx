@@ -56,7 +56,7 @@ export const JWTProvider = ({ children }) => {
         const serviceToken = window.localStorage.getItem('serviceToken');
         if (serviceToken && verifyToken(serviceToken)) {
           setSession(serviceToken);
-          const response = await axios.get('/account/me');
+          const response = await axios.get('/api/account/me');
           const { user } = response.data;
 
           dispatch({
@@ -83,7 +83,7 @@ export const JWTProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    const response = await axios.post('/account/login', { email, password });
+    const response = await axios.post('/api/account/login', { email, password });
     const { serviceToken, user } = response.data;
     setSession(serviceToken);
     dispatch({
@@ -98,7 +98,7 @@ export const JWTProvider = ({ children }) => {
   const register = async (email, password, firstName, lastName) => {
     // todo: this flow need to be recode as it not verified
     const id = chance.bb_pin();
-    const response = await axios.post('/account/register', {
+    const response = await axios.post('/api/account/register', {
       id,
       email,
       password,
