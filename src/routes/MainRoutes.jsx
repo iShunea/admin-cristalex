@@ -10,6 +10,7 @@ import FormJobs from 'pages/forms/jobs';
 import FormEditJobs from 'pages/edit-form-grids/jobs';
 import FormEditTeam from 'pages/edit-form-grids/team';
 import FormEditWorks from 'pages/edit-form-grids/works';
+import FormEditSocialMedia from 'pages/edit-form-grids/social-media';
 
 // // render - dashboard
 // const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/default')));
@@ -327,6 +328,10 @@ const MainRoutes = {
                 {
                   path: 'services/:id',
                   element: <FormEditServices />
+                },
+                {
+                  path: 'social-media/:id',
+                  element: <FormEditSocialMedia />
                 }
               ]
             }
