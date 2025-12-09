@@ -389,7 +389,7 @@ export default function TextForm({ data, setData, handleNext, setErrorIndex }) {
                 <GooglePreview 
                   title={formik.values.blogTitleEn}
                   description={formik.values.metaDescriptionEn}
-                  url={`https://easyreserv.com/${formik.values.id || 'Blog/your-article-url'}`}
+                  url={`https://cristalexdent.md/${formik.values.id || 'Blog/your-article-url'}`}
                 />
               </Grid>
             </>
@@ -571,7 +571,7 @@ export default function TextForm({ data, setData, handleNext, setErrorIndex }) {
                 <GooglePreview 
                   title={formik.values.blogTitleRo}
                   description={formik.values.metaDescriptionRo}
-                  url={`https://easyreserv.com/${formik.values.id || 'Blog/your-article-url'}`}
+                  url={`https://cristalexdent.md/${formik.values.id || 'Blog/your-article-url'}`}
                 />
               </Grid>
             </>
@@ -753,7 +753,7 @@ export default function TextForm({ data, setData, handleNext, setErrorIndex }) {
                 <GooglePreview 
                   title={formik.values.blogTitleRu}
                   description={formik.values.metaDescriptionRu}
-                  url={`https://easyreserv.com/${formik.values.id || 'Blog/your-article-url'}`}
+                  url={`https://cristalexdent.md/${formik.values.id || 'Blog/your-article-url'}`}
                 />
               </Grid>
             </>
