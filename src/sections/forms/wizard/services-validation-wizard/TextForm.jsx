@@ -1,18 +1,19 @@
 import PropTypes from 'prop-types';
-// material-ui
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import InputLabel from '@mui/material/InputLabel';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 
-// third-party
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-// project-imports
 import AnimateButton from 'components/@extended/AnimateButton';
+import ServiceImporter from 'components/services/ServiceImporter';
+import ServiceTemplateDownloader from 'components/services/ServiceTemplateDownloader';
 
 const validationSchema = yup.object({
   id: yup.string().required('Page ID is required'),
@@ -28,23 +29,22 @@ const validationSchema = yup.object({
   titleDescription: yup.string().required('Subheading is required')
 });
 
-// ==============================|| VALIDATION WIZARD - TEXT  ||============================== //
-
 export default function TextForm({ data, setData, handleNext, setErrorIndex }) {
   const formik = useFormik({
     initialValues: {
-      id: data.id,
-      title: data.title,
+      id: data.id ?? '',
+      title: data.title ?? '',
       metaDescription: data.metaDescription ?? '',
       metaKeywords: data.metaKeywords ?? '',
-      firstIconTitle: data.firstIconTitle,
-      firstIconDescription: data.firstIconDescription,
-      secondIconTitle: data.secondIconTitle,
-      secondIconDescription: data.secondIconDescription,
-      imageTitle: data.imageTitle,
-      imageTitleDescription: data.imageTitleDescription,
-      titleDescription: data.titleDescription
+      firstIconTitle: data.firstIconTitle ?? '',
+      firstIconDescription: data.firstIconDescription ?? '',
+      secondIconTitle: data.secondIconTitle ?? '',
+      secondIconDescription: data.secondIconDescription ?? '',
+      imageTitle: data.imageTitle ?? '',
+      imageTitleDescription: data.imageTitleDescription ?? '',
+      titleDescription: data.titleDescription ?? ''
     },
+    enableReinitialize: true,
     validationSchema,
     onSubmit: (values) => {
       setData({
@@ -66,11 +66,31 @@ export default function TextForm({ data, setData, handleNext, setErrorIndex }) {
     }
   });
 
+  const handleImport = (importedData) => {
+    setData({
+      ...data,
+      ...importedData
+    });
+  };
+
   return (
     <>
       <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
         Text Information on page
       </Typography>
+      
+      <Box sx={{ mb: 3, p: 2, bgcolor: 'grey.50', borderRadius: 2 }}>
+        <Typography variant="subtitle1" sx={{ mb: 2 }}>
+          Import / Export Templates
+        </Typography>
+        <Stack direction="row" spacing={2} flexWrap="wrap">
+          <ServiceTemplateDownloader />
+          <ServiceImporter onImport={handleImport} />
+        </Stack>
+      </Box>
+
+      <Divider sx={{ mb: 3 }} />
+
       <form onSubmit={formik.handleSubmit} id="validation-forms">
         <Grid container spacing={3}>
           <Grid item xs={12}>
