@@ -1,164 +1,86 @@
-// material-ui
-import Grid from '@mui/material/Grid';
+import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import React from 'react';
-import ImageDisplay from 'components/ImageDisplay';
-
-// ==============================|| VALIDATION WIZARD - REVIEW  ||============================== //
+import Chip from '@mui/material/Chip';
+import Divider from '@mui/material/Divider';
 
 export default function Review({ data }) {
-  console.log(data.imageLabelSrc);
-
   return (
     <>
-      <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
-        Summary
+      <Typography variant="h5" gutterBottom sx={{ mb: 3 }}>
+        Review Service
       </Typography>
+      
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Stack spacing={1}>
-            <Typography variant="h6" gutterBottom>
-              Page ID
+            <Typography variant="subtitle2" color="text.secondary">
+              Title Key
             </Typography>
-            <Typography variant="body" gutterBottom>
-              {data.id}
-            </Typography>
-          </Stack>
-        </Grid>
-        <Grid item xs={12}>
-          <Stack spacing={1}>
-            <Typography variant="h6" gutterBottom>
-              Meta description
-            </Typography>
-            <Typography variant="body" gutterBottom>
-              {data.metaDescription}
+            <Typography variant="body1">
+              {data.titleKey || '-'}
             </Typography>
           </Stack>
         </Grid>
+        
+        <Grid item xs={12}>
+          <Divider />
+        </Grid>
+        
         <Grid item xs={12}>
           <Stack spacing={1}>
-            <Typography variant="h6" gutterBottom>
-              Meta keywords
+            <Typography variant="subtitle2" color="text.secondary">
+              Description Key
             </Typography>
-            <Typography variant="body" gutterBottom>
-              {data.metaKeywords}
+            <Typography variant="body1">
+              {data.descKey || '-'}
             </Typography>
           </Stack>
         </Grid>
+        
         <Grid item xs={12}>
-          <Stack spacing={1}>
-            <Typography variant="h6" gutterBottom>
-              Label Image of page
-            </Typography>
-            <ImageDisplay file={data.imageLabelSrc} />
-          </Stack>
+          <Divider />
         </Grid>
-        <Grid item xs={12}>
+        
+        <Grid item xs={12} sm={6}>
           <Stack spacing={1}>
-            <Typography variant="h6" gutterBottom>
-              Title of the page
+            <Typography variant="subtitle2" color="text.secondary">
+              Price
             </Typography>
-            <Typography variant="body" gutterBottom>
-              {data.title}
+            <Typography variant="body1">
+              {data.price || '-'}
             </Typography>
           </Stack>
         </Grid>
+        
         <Grid item xs={12}>
-          <Stack spacing={1}>
-            <Typography variant="h6" gutterBottom>
-              Subheading
-            </Typography>
-            <Typography variant="body" gutterBottom>
-              {data.titleDescription}
-            </Typography>
-          </Stack>
+          <Divider />
         </Grid>
+        
         <Grid item xs={12}>
           <Stack spacing={1}>
-            <Typography variant="h6" gutterBottom>
-              First icon title
+            <Typography variant="subtitle2" color="text.secondary">
+              Features
             </Typography>
-            <Typography variant="body" gutterBottom>
-              {data.firstIconTitle}
-            </Typography>
-          </Stack>
-        </Grid>
-        <Grid item xs={12}>
-          <Stack spacing={1}>
-            <Typography variant="h6" gutterBottom>
-              Icon
-            </Typography>
-            <ImageDisplay file={data.firstIconPath} />
-          </Stack>
-        </Grid>
-        <Grid item xs={12}>
-          <Stack spacing={1}>
-            <Typography variant="h6" gutterBottom>
-              First icon description
-            </Typography>
-            <Typography variant="body" gutterBottom>
-              {data.firstIconDescription}
-            </Typography>
-          </Stack>
-        </Grid>
-        <Grid item xs={12}>
-          <Stack spacing={1}>
-            <Typography variant="h6" gutterBottom>
-              Second icon title
-            </Typography>
-            <Typography variant="body" gutterBottom>
-              {data.secondIconTitle}
-            </Typography>
-          </Stack>
-        </Grid>
-        <Grid item xs={12}>
-          <Stack spacing={1}>
-            <Typography variant="h6" gutterBottom>
-              Icon
-            </Typography>
-            <ImageDisplay file={data.secondIconPath} />
-          </Stack>
-        </Grid>
-        <Grid item xs={12}>
-          <Stack spacing={1}>
-            <Typography variant="h6" gutterBottom>
-              Second icon description
-            </Typography>
-            <Typography variant="body" gutterBottom>
-              {data.secondIconDescription}
-            </Typography>
-          </Stack>
-        </Grid>
-        <Grid item xs={12}>
-          <Stack spacing={1}>
-            <Typography variant="h6" gutterBottom>
-              Main image title
-            </Typography>
-            <Typography variant="body" gutterBottom>
-              {data.imageTitle}
-            </Typography>
-          </Stack>
-        </Grid>
-        <Grid item xs={12}>
-          <Stack spacing={1}>
-            <Typography variant="h6" gutterBottom>
-              Main image
-            </Typography>
-            <ImageDisplay file={data.imageTitlePath} />
-          </Stack>
-        </Grid>
-        <Grid item xs={12}>
-          <Stack spacing={1}>
-            <Typography variant="h6" gutterBottom>
-              Main image description
-            </Typography>
-            <Typography variant="body" gutterBottom>
-              {data.imageTitleDescription}
-            </Typography>
+            {data.features && data.features.length > 0 ? (
+              <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                {data.features.map((feature, index) => (
+                  <Chip key={index} label={feature} size="small" sx={{ mb: 1 }} />
+                ))}
+              </Stack>
+            ) : (
+              <Typography variant="body2" color="text.secondary">
+                No features added
+              </Typography>
+            )}
           </Stack>
         </Grid>
       </Grid>
     </>
   );
 }
+
+Review.propTypes = {
+  data: PropTypes.object
+};

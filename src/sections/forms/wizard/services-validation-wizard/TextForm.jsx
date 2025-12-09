@@ -16,67 +16,53 @@ import ServiceImporter from 'components/services/ServiceImporter';
 import ServiceTemplateDownloader from 'components/services/ServiceTemplateDownloader';
 
 const validationSchema = yup.object({
-  id: yup.string().required('Page ID is required'),
-  title: yup.string().required('Title is required'),
-  firstIconTitle: yup.string().required('Icon title is required'),
-  firstIconDescription: yup.string().required('Icon description is required'),
-  secondIconDescription: yup.string().required('Icon description is required'),
-  secondIconTitle: yup.string().required('Icon title is required'),
-  metaDescription: yup.string().required('Meta description is required'),
-  metaKeywords: yup.string().required('Meta keywords is required'),
-  imageTitle: yup.string().required('Principal image description is required'),
-  imageTitleDescription: yup.string().required('Principal image description is required'),
-  titleDescription: yup.string().required('Subheading is required')
+  titleKey: yup.string().required('Title Key is required'),
+  descKey: yup.string().required('Description Key is required'),
+  price: yup.string().required('Price is required'),
+  features: yup.string()
 });
 
 export default function TextForm({ data, setData, handleNext, setErrorIndex }) {
   const formik = useFormik({
     initialValues: {
-      id: data.id ?? '',
-      title: data.title ?? '',
-      metaDescription: data.metaDescription ?? '',
-      metaKeywords: data.metaKeywords ?? '',
-      firstIconTitle: data.firstIconTitle ?? '',
-      firstIconDescription: data.firstIconDescription ?? '',
-      secondIconTitle: data.secondIconTitle ?? '',
-      secondIconDescription: data.secondIconDescription ?? '',
-      imageTitle: data.imageTitle ?? '',
-      imageTitleDescription: data.imageTitleDescription ?? '',
-      titleDescription: data.titleDescription ?? ''
+      titleKey: data.titleKey ?? '',
+      descKey: data.descKey ?? '',
+      price: data.price ?? '',
+      features: data.features ?? ''
     },
     enableReinitialize: true,
     validationSchema,
     onSubmit: (values) => {
+      const featuresArray = values.features 
+        ? values.features.split('\n').filter(f => f.trim() !== '')
+        : [];
+      
       setData({
-        id: values.id,
-        baseUrl: 'services',
-        title: values.title,
-        metaDescription: values.metaDescription,
-        metaKeywords: values.metaKeywords,
-        firstIconTitle: values.firstIconTitle,
-        firstIconDescription: values.firstIconDescription,
-        secondIconTitle: values.secondIconTitle,
-        secondIconDescription: values.secondIconDescription,
-        imageTitle: values.imageTitle,
-        imageTitleDescription: values.imageTitleDescription,
-        titleDescription: values.titleDescription,
-        ...data
+        ...data,
+        titleKey: values.titleKey,
+        descKey: values.descKey,
+        price: values.price,
+        features: featuresArray
       });
       handleNext();
     }
   });
 
   const handleImport = (importedData) => {
+    const processedData = { ...importedData };
+    if (Array.isArray(importedData.features)) {
+      processedData.features = importedData.features.join('\n');
+    }
     setData({
       ...data,
-      ...importedData
+      ...processedData
     });
   };
 
   return (
     <>
       <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
-        Text Information on page
+        Service Information
       </Typography>
       
       <Box sx={{ mb: 3, p: 2, bgcolor: 'grey.50', borderRadius: 2 }}>
@@ -95,15 +81,15 @@ export default function TextForm({ data, setData, handleNext, setErrorIndex }) {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Stack spacing={1}>
-              <InputLabel>Page ID</InputLabel>
+              <InputLabel>Title Key *</InputLabel>
               <TextField
-                id="id"
-                name="id"
-                placeholder="Page ID *"
-                value={formik.values.id}
+                id="titleKey"
+                name="titleKey"
+                placeholder="e.g., implantologie, ortodontie, estetica-dentara"
+                value={formik.values.titleKey}
                 onChange={formik.handleChange}
-                error={formik.touched.id && Boolean(formik.errors.id)}
-                helperText={formik.touched.id && formik.errors.id}
+                error={formik.touched.titleKey && Boolean(formik.errors.titleKey)}
+                helperText={formik.touched.titleKey && formik.errors.titleKey}
                 fullWidth
                 autoComplete="off"
               />
@@ -111,67 +97,33 @@ export default function TextForm({ data, setData, handleNext, setErrorIndex }) {
           </Grid>
           <Grid item xs={12}>
             <Stack spacing={1}>
-              <InputLabel>Meta description</InputLabel>
+              <InputLabel>Description Key *</InputLabel>
               <TextField
-                id="metaDescription"
-                name="metaDescription"
-                placeholder="Meta description *"
-                multiline
-                value={formik.values.metaDescription}
-                onChange={formik.handleChange}
-                error={formik.touched.metaDescription && Boolean(formik.errors.metaDescription)}
-                helperText={formik.touched.metaDescription && formik.errors.metaDescription}
-                fullWidth
-                autoComplete="off"
-              />
-            </Stack>
-          </Grid>
-          <Grid item xs={12}>
-            <Stack spacing={1}>
-              <InputLabel>Meta keywords</InputLabel>
-              <TextField
-                id="metaKeywords"
-                name="metaKeywords"
-                placeholder="Meta keywords *"
-                multiline
-                value={formik.values.metaKeywords}
-                onChange={formik.handleChange}
-                error={formik.touched.metaKeywords && Boolean(formik.errors.metaKeywords)}
-                helperText={formik.touched.metaKeywords && formik.errors.metaKeywords}
-                fullWidth
-                autoComplete="off"
-              />
-            </Stack>
-          </Grid>
-          <Grid item xs={12}>
-            <Stack spacing={1}>
-              <InputLabel>Title of the page</InputLabel>
-              <TextField
-                id="title"
-                name="title"
-                placeholder="Title of the page *"
-                value={formik.values.title}
-                onChange={formik.handleChange}
-                error={formik.touched.title && Boolean(formik.errors.title)}
-                helperText={formik.touched.title && formik.errors.title}
-                fullWidth
-                autoComplete="off"
-              />
-            </Stack>
-          </Grid>
-          <Grid item xs={12}>
-            <Stack spacing={1}>
-              <InputLabel>Subheading</InputLabel>
-              <TextField
-                id="titleDescription"
-                name="titleDescription"
+                id="descKey"
+                name="descKey"
+                placeholder="Service description key"
                 multiline
                 minRows={2}
-                placeholder="Subheading *"
-                value={formik.values.titleDescription}
+                value={formik.values.descKey}
                 onChange={formik.handleChange}
-                error={formik.touched.titleDescription && Boolean(formik.errors.titleDescription)}
-                helperText={formik.touched.titleDescription && formik.errors.titleDescription}
+                error={formik.touched.descKey && Boolean(formik.errors.descKey)}
+                helperText={formik.touched.descKey && formik.errors.descKey}
+                fullWidth
+                autoComplete="off"
+              />
+            </Stack>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Stack spacing={1}>
+              <InputLabel>Price *</InputLabel>
+              <TextField
+                id="price"
+                name="price"
+                placeholder="e.g., 500 MDL, de la 1000 MDL"
+                value={formik.values.price}
+                onChange={formik.handleChange}
+                error={formik.touched.price && Boolean(formik.errors.price)}
+                helperText={formik.touched.price && formik.errors.price}
                 fullWidth
                 autoComplete="off"
               />
@@ -179,99 +131,17 @@ export default function TextForm({ data, setData, handleNext, setErrorIndex }) {
           </Grid>
           <Grid item xs={12}>
             <Stack spacing={1}>
-              <InputLabel>First icon title</InputLabel>
+              <InputLabel>Features (one per line)</InputLabel>
               <TextField
-                id="firstIconTitle"
-                name="firstIconTitle"
-                placeholder="First icon title *"
-                value={formik.values.firstIconTitle}
-                onChange={formik.handleChange}
-                error={formik.touched.firstIconTitle && Boolean(formik.errors.firstIconTitle)}
-                helperText={formik.touched.firstIconTitle && formik.errors.firstIconTitle}
-                fullWidth
-                autoComplete="off"
-              />
-            </Stack>
-          </Grid>
-          <Grid item xs={12}>
-            <Stack spacing={1}>
-              <InputLabel>First icon description</InputLabel>
-              <TextField
-                id="firstIconDescription"
-                name="firstIconDescription"
-                placeholder="First icon description *"
+                id="features"
+                name="features"
+                placeholder="Feature 1&#10;Feature 2&#10;Feature 3"
                 multiline
-                minRows={2}
-                value={formik.values.firstIconDescription}
+                minRows={4}
+                value={formik.values.features}
                 onChange={formik.handleChange}
-                error={formik.touched.firstIconDescription && Boolean(formik.errors.firstIconDescription)}
-                helperText={formik.touched.firstIconDescription && formik.errors.firstIconDescription}
-                fullWidth
-                autoComplete="off"
-              />
-            </Stack>
-          </Grid>
-          <Grid item xs={12}>
-            <Stack spacing={1}>
-              <InputLabel>Second icon title</InputLabel>
-              <TextField
-                id="secondIconTitle"
-                name="secondIconTitle"
-                placeholder="Second icon title *"
-                value={formik.values.secondIconTitle}
-                onChange={formik.handleChange}
-                error={formik.touched.secondIconTitle && Boolean(formik.errors.secondIconTitle)}
-                helperText={formik.touched.secondIconTitle && formik.errors.secondIconTitle}
-                fullWidth
-                autoComplete="off"
-              />
-            </Stack>
-          </Grid>
-          <Grid item xs={12}>
-            <Stack spacing={1}>
-              <InputLabel>Second icon description</InputLabel>
-              <TextField
-                id="secondIconDescription"
-                name="secondIconDescription"
-                placeholder="Second icon description *"
-                multiline
-                minRows={2}
-                value={formik.values.secondIconDescription}
-                onChange={formik.handleChange}
-                error={formik.touched.secondIconDescription && Boolean(formik.errors.secondIconDescription)}
-                helperText={formik.touched.secondIconDescription && formik.errors.secondIconDescription}
-                fullWidth
-                autoComplete="off"
-              />
-            </Stack>
-          </Grid>
-          <Grid item xs={12}>
-            <Stack spacing={1}>
-              <InputLabel>Principal image title</InputLabel>
-              <TextField
-                id="imageTitle"
-                name="imageTitle"
-                placeholder="Principal image title *"
-                value={formik.values.imageTitle}
-                onChange={formik.handleChange}
-                error={formik.touched.imageTitle && Boolean(formik.errors.imageTitle)}
-                helperText={formik.touched.imageTitle && formik.errors.imageTitle}
-                fullWidth
-                autoComplete="off"
-              />
-            </Stack>
-          </Grid>
-          <Grid item xs={12}>
-            <Stack spacing={1}>
-              <InputLabel>Main image description</InputLabel>
-              <TextField
-                id="imageTitleDescription"
-                name="imageTitleDescription"
-                placeholder="Main image description *"
-                value={formik.values.imageTitleDescription}
-                onChange={formik.handleChange}
-                error={formik.touched.imageTitleDescription && Boolean(formik.errors.imageTitleDescription)}
-                helperText={formik.touched.imageTitleDescription && formik.errors.imageTitleDescription}
+                error={formik.touched.features && Boolean(formik.errors.features)}
+                helperText={formik.touched.features && formik.errors.features || "Enter each feature on a new line"}
                 fullWidth
                 autoComplete="off"
               />
