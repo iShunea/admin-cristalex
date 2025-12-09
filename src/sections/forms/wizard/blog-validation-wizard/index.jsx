@@ -62,7 +62,22 @@ export default function AddBlogPage() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const response = await axiosInstance.post('/api/blog-posts', data);
+      
+      const formData = new FormData();
+      
+      if (data.titleImagePath) {
+        formData.append('image', data.titleImagePath);
+      }
+      
+      Object.keys(data).forEach(key => {
+        if (key !== 'titleImagePath' && data[key] !== null && data[key] !== undefined) {
+          formData.append(key, data[key]);
+        }
+      });
+      
+      const response = await axiosInstance.post('/api/blog-posts', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
       console.log('response:', response);
       setErrorMessage('');
     } catch (error) {
