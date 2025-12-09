@@ -92,7 +92,7 @@ export default function EditServicePage() {
       formData.append('imageTitleDescription', data.imageTitleDescription || '');
       formData.append('titleDescription', data.titleDescription || '');
       
-      const response = await axiosInstance.put('/api/admin/edit/services/' + idPage, formData, {
+      const response = await axiosInstance.put('/api/services/' + idPage, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       console.log('response:', response);
@@ -110,7 +110,7 @@ export default function EditServicePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const retrieveArticles = await axiosInstance.get('/api/admin/edit/services/' + idPage);
+        const retrieveArticles = await axiosInstance.get('/api/services/' + idPage);
         if (retrieveArticles.status === 200) {
           console.log(retrieveArticles);
           setData(retrieveArticles.data);

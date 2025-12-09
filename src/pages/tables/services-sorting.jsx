@@ -127,7 +127,7 @@ export default function SortingTable() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const retrieveServices = await axiosInstance.get('/api/admin/services/list');
+        const retrieveServices = await axiosInstance.get('/api/services');
         if (retrieveServices.status === 200) {
           setData(retrieveServices.data);
         } else {
