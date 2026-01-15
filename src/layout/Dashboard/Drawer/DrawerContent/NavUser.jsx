@@ -100,7 +100,7 @@ export default function UserList() {
           <ListItemAvatar>
             <Avatar alt="Avatar" src={avatar1} sx={{ ...(drawerOpen && { width: 46, height: 46 }) }} />
           </ListItemAvatar>
-          <ListItemText primary={user?.name} sx={{ ...(!drawerOpen && { display: 'none' }) }} secondary="UI/UX Designer" />
+          <ListItemText primary={user?.name || 'Admin'} sx={{ ...(!drawerOpen && { display: 'none' }) }} secondary="Admin" />
         </ListItem>
       </List>
       <Menu
@@ -113,12 +113,6 @@ export default function UserList() {
         transformOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       >
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        <MenuItem component={Link} to="/apps/profiles/user/personal" onClick={handleClose}>
-          Profile
-        </MenuItem>
-        <MenuItem component={Link} to="/apps/profiles/account/basic" onClick={handleClose}>
-          My account
-        </MenuItem>
       </Menu>
     </Box>
   );

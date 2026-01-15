@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
   // https://github.com/jpuri/react-draft-wysiwyg/issues/1317
   const env = loadEnv(mode, process.cwd(), '');
   const BASE_NAME = env.VITE_APP_BASE_NAME || '/';
-  const PORT = 5000;
+  const PORT = 3060;
 
   return {
     server: {

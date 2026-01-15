@@ -5,7 +5,7 @@
 // Fallback configuration if not injected by server (dev mode)
 const getFallbackConfig = () => ({
   // Required configuration
-  API_URL: import.meta.env.VITE_APP_API_URL || 'http://localhost:5001/',
+  API_URL: import.meta.env.VITE_APP_API_URL || 'https://backend-cristalex-dent.onrender.com/',
   VERSION: import.meta.env.VITE_APP_VERSION || 'v9.2.1',
   BASE_NAME: import.meta.env.VITE_APP_BASE_NAME || '/',
 
@@ -41,7 +41,7 @@ const getConfig = (key, fallback = '') => {
 // Export synchronous config object (uses cached values with getters)
 export const config = {
   // Required configuration
-  get API_URL() { return getConfig('API_URL', 'http://localhost:5001/'); },
+  get API_URL() { return getConfig('API_URL', 'https://backend-cristalex-dent.onrender.com/'); },
   get VERSION() { return getConfig('VERSION', 'v9.2.1'); },
   get BASE_NAME() { return getConfig('BASE_NAME', '/'); },
 
