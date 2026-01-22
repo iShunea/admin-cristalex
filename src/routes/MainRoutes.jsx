@@ -12,6 +12,7 @@ import FormEditTeam from 'pages/edit-form-grids/team';
 import FormEditWorks from 'pages/edit-form-grids/works';
 import FormEditSocialMedia from 'pages/edit-form-grids/social-media';
 import FormEditBeforeAfter from 'pages/edit-form-grids/before-after';
+import FormEditGalleryMedia from 'pages/edit-form-grids/gallery-media';
 
 // // render - dashboard
 // const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/default')));
@@ -68,6 +69,7 @@ const FormEditServices = Loadable(lazy(() => import('pages/edit-form-grids/servi
 const FormTestimonials = Loadable(lazy(() => import('pages/forms/testimonials')));
 const FormSocialMedia = Loadable(lazy(() => import('pages/forms/social-media')));
 const FormBeforeAfter = Loadable(lazy(() => import('pages/forms/before-after')));
+const FormGalleryMedia = Loadable(lazy(() => import('pages/forms/gallery-media')));
 
 const ReactTableServices = Loadable(lazy(() => import('pages/tables/services-sorting')));
 const ReactTableJobs = Loadable(lazy(() => import('pages/tables/jobs-sorting')));
@@ -77,6 +79,9 @@ const ReactTableWorks = Loadable(lazy(() => import('pages/tables/works-sorting')
 const ReactTableTestimonials = Loadable(lazy(() => import('pages/tables/testimonials-sorting')));
 const ReactTableSocialMedia = Loadable(lazy(() => import('pages/tables/social-media-sorting')));
 const ReactTableBeforeAfter = Loadable(lazy(() => import('pages/tables/before-after-sorting')));
+const ReactTableGalleryMedia = Loadable(lazy(() => import('pages/tables/gallery-media-sorting')));
+
+const TeamMemberDetail = Loadable(lazy(() => import('pages/team-member-detail')));
 
 // render - charts & map
 const ChartApexchart = Loadable(lazy(() => import('pages/charts/apexchart')));
@@ -314,6 +319,10 @@ const MainRoutes = {
               element: <FormBeforeAfter />
             },
             {
+              path: 'gallery-media',
+              element: <FormGalleryMedia />
+            },
+            {
               path: 'edit',
               children: [
                 {
@@ -343,6 +352,10 @@ const MainRoutes = {
                 {
                   path: 'before-after/:id',
                   element: <FormEditBeforeAfter />
+                },
+                {
+                  path: 'gallery-media/:id',
+                  element: <FormEditGalleryMedia />
                 }
               ]
             }
@@ -364,6 +377,10 @@ const MainRoutes = {
               element: <ReactTableTeam />
             },
             {
+              path: 'team-sorting',
+              element: <ReactTableTeam />
+            },
+            {
               path: 'blogs',
               element: <ReactTableBlogs />
             },
@@ -382,6 +399,19 @@ const MainRoutes = {
             {
               path: 'before-after',
               element: <ReactTableBeforeAfter />
+            },
+            {
+              path: 'gallery-media',
+              element: <ReactTableGalleryMedia />
+            }
+          ]
+        },
+        {
+          path: 'team',
+          children: [
+            {
+              path: ':id',
+              element: <TeamMemberDetail />
             }
           ]
         },

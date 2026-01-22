@@ -121,7 +121,12 @@ function ReactTable({ columns, data, onDelete }) {
               </TableHead>
               <TableBody>
                 {table.getRowModel().rows.map((row) => (
-                  <TableRow key={row.id}>
+                  <TableRow
+                    key={row.id}
+                    hover
+                    onClick={() => navigate(`/team/${row.original._id || row.original.id}`)}
+                    sx={{ cursor: 'pointer' }}
+                  >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id} {...cell.column.columnDef.meta}>
                         {cell.column.id === 'actions' ? (

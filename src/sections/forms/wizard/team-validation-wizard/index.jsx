@@ -63,18 +63,27 @@ export default function AddTeamMember() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      
+
       const formData = new FormData();
-      
+
       if (data.imageUrl && data.imageUrl instanceof File) {
         formData.append('image', data.imageUrl);
       }
-      
+
+      // Add certification images
+      if (data.certifications && data.certifications.length > 0) {
+        data.certifications.forEach((cert) => {
+          if (cert.file instanceof File) {
+            formData.append('certifications', cert.file);
+          }
+        });
+      }
+
       formData.append('name', data.name || '');
       formData.append('role', data.role || '');
       formData.append('bio', data.bio || '');
       formData.append('orderIndex', data.orderIndex !== undefined ? data.orderIndex : 0);
-      
+
       const response = await axiosInstance.post('/api/team-members', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
