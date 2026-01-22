@@ -156,6 +156,28 @@ const formsTables = {
           icon: icons.reactTables
         }
       ]
+    },
+    {
+      id: 'gallery-media-management',
+      title: <FormattedMessage id="Gallery Media" />,
+      type: 'collapse',
+      icon: icons.wizard,
+      children: [
+        {
+          id: 'add-gallery-media',
+          title: <FormattedMessage id="Add Media" />,
+          type: 'item',
+          url: '/forms/gallery-media',
+          icon: icons.wizard
+        },
+        {
+          id: 'list-gallery-media',
+          title: <FormattedMessage id="Gallery Media List" />,
+          type: 'item',
+          url: '/tables/gallery-media',
+          icon: icons.reactTables
+        }
+      ]
     }
   ]
 };
