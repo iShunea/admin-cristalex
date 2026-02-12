@@ -112,7 +112,9 @@
   },
   "scripts": {
     "start": "vite",
+    "clean": "rm -rf dist",
     "build": "vite build",
+    "build:prod": "rm -rf dist && vite build --mode production",
     "build-stage": "env-cmd -f .env.qa vite build",
     "preview": "vite preview",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
